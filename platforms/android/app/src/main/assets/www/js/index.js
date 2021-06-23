@@ -40,7 +40,7 @@ function onDeviceReady() {
         */
     });
 
-    //init();
+    init();
 
 }
 

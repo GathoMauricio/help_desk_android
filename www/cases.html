@@ -2,84 +2,162 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="media-src *">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <meta name="color-scheme" content="light dark">
-    <link rel="icon" href="img/logo.png" type="image/png">
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="css/bootstrap.min.css.map">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/simple-mobile-menu.css">
-    <link rel="stylesheet" href="css/simple-mobile-menu-responsive.css">
-    <link rel="stylesheet" href="css/sweetalert.css">
-    <link rel="stylesheet" href="css/font.css">
-    <link rel="stylesheet" href="css/index.css">
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="media-src *" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="img/logo.png" type="image/png" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
+    <link href="css/bootstrap.min.css.map" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/simple-mobile-menu.css" />
+    <link rel="stylesheet" href="css/simple-mobile-menu-responsive.css" />
+    <link rel="stylesheet" href="css/sweetalert.css" />
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="stylesheet" href="css/index.css" />
     <title>cases</title>
 </head>
 
 <body>
-
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand p-2" href="#">
-            <img src="img/alis.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <img src="img/alis.png" width="30" height="30" class="d-inline-block align-top" alt="" />
             <b>Alis foods</b>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active p-2">
-                    <a class="nav-link link-item-main-menu" href="menu.html">Inicio <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active p-2">
-                    <a class="nav-link link-item-main-menu" href="cases.html">Casos <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active p-2">
-                    <a class="nav-link link-item-main-menu" href="config.html">Ajustes <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-        </div>
+                    <a class="nav-link link-item-main-menu" href="menu.html">Inicio <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item active p-2">
+            <a class="nav-link link-item-main-menu" href="cases.html"
+              >Casos <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item active p-2">
+            <a class="nav-link link-item-main-menu" href="config.html"
+              >Ajustes <span class="sr-only">(current)</span></a
+            >
+          </li>
+        </ul>
+      </div>
     </nav>
-
 
     <main id="main_container"></main>
     <div class="box-buttons" id="box-buttons">
-        <a onclick="createCase();" class="float-button" style="background-color:#BA4A00;"><span
-                class="icon-plus"></span></a>
-    </div>
-    <div id="create_binnacle_container"></div>
-    <div id="main_menu"></div>
-    <script src="cordova.js"></script>
-    <script src="js/jquery.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="js/sweetalert.js"></script>
-    <script src="js/index.js"></script>
-    <script>
-        $(document).ready(function() {
-            const api_token = window.localStorage.getItem("api_token");
-            console.log("My Api: " + api_token);
-            startLoading("Cargando casos...");
-            $.ajax({
-                type: "GET",
-                url: api_host + "case_index",
-                data: {
-                    api_token: api_token
-                },
-                success: data => {
-                    console.log(data);
-                    let count = 0;
-                    $.each(data, (index, item) => {
-                        count++;
-                        $("#main_container")
-                            .append(`<div class="row" onclick="onShowBinnacleImages(${item.id});">
+      <a
+        onclick="createCase();"
+        class="float-button"
+        style="background-color: #ba4a00"
+        >
+        <span class="icon-plus"></span>
+    </a>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="create_case_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title lbl-form" id="exampleModalLabel">Crear caso</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <form id="frm_store_case">
+                        <input type="hidden" name="api_token" id="txt_api_token">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Área</label>
+                                            <select class="form-control" id="cbo_areas" onchange="changeArea(this.value);">
+                                            <option value="">--Seleccione una opción--</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Servicio</label>
+                                            <select class="form-control" id="cbo_servicios" onchange="changeServicio(this.value);">
+                                            <option value="">--Seleccione una opción--</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Categoría</label>
+                                            <select class="form-control" id="cbo_categorias" onchange="changeCategoria(this.value);">
+                                            <option value="">--Seleccione una opción--</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Síntoma</label>
+                                            <select class="form-control" id="cbo_sintomas">
+                                            <option value="">--Seleccione una opción--</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Prioridad</label>
+                                            <select class="form-control" id="cbo_prioridades">
+                                            <option value="">--Seleccione una opción--</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Descripción</label>
+                                            <textarea class="form-control" id="txt_descripcion"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script src="cordova.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="js/sweetalert.js"></script>
+        <script src="js/index.js"></script>
+        <script>
+            $(document).ready(function() {
+                startLoading("Cargando casos...");
+                $.ajax({
+                    type: "GET",
+                    url: api_host + "case_index",
+                    data: {
+                        api_token: window.localStorage.getItem("api_token"),
+                    },
+                    success: (data) => {
+                        console.log(data);
+                        let count = 0;
+                        $.each(data, (index, item) => {
+                            count++;
+                            $("#main_container")
+                                .append(`<div class="row" onclick="onShowBinnacleImages(${item.id});">
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-body">
@@ -87,8 +165,19 @@
                                                         <tr>
                                                             <td width="80%" class="p-1" style="font-weight:bold;font-size:14px;">
                                                                 <span style="color:#2471A3;font-weight:bold;">${item.author}</span>
+                                                                <br />
+                                                                Caso: <b>${item.case}</b>
+                                                                <br />
+                                                                Suc: <b>${item.branch}</b>
                                                                 <br/>
                                                                 ${item.description}
+                                                                <br/>
+                                                                <table style="width:100%;">
+                                                                    <tr>
+                                                                        <td width="50%">Prioridad: ${item.priority}</td>
+                                                                        <td width="50%">Estatus: ${item.status}</td>
+                                                                    </tr>
+                                                                </table>
                                                                 <br/>
                                                                 ${item.date}
                                                             </td>
@@ -101,21 +190,146 @@
                                             </div>
                                         </div>
                                     </div>`);
-                    });
-                    $("#main_container")
-                        .append(`<br/><br/><br/>`);
-                    if (count <= 0) {
-                        $("#main_container").html(
-                            `<center><img src="img/empty.png" width="80%"><br><span class="msg_empty">No se encontró información.</span></center>`
-                        );
-                    }
-                    stopLoading();
-                },
-                error: error => console.log(error)
-            });
-        });
-    </script>
+                        });
+                        $("#main_container").append(`<br/><br/><br/>`);
+                        if (count <= 0) {
+                            $("#main_container").html(
+                                `<center><img src="img/empty.png" width="80%"><br><span class="msg_empty">No se encontró información.</span></center>`
+                            );
+                        }
+                        stopLoading();
 
+                        $("#frm_store_case").submit(function(e) {
+                            e.preventDefault();
+                            if ($("#cbo_areas").val().length <= 0) {
+                                toastError("No se ha seleccionado el área");
+                                return;
+                            }
+                            console.log("Pasa")
+                        });
+                    },
+                    error: (err) => console.log(JSON.stringify(err)),
+                });
+            });
+
+            function createCase() {
+                //pasar token al formulario
+                $("#txt_api_token").val(window.localStorage.getItem("api_token"));
+                //lenar campos
+                $.ajax({
+                    type: "GET",
+                    url: api_host + "case_create",
+                    data: {
+                        api_token: window.localStorage.getItem("api_token"),
+                    },
+                    success: (data) => {
+                        console.log(data);
+                        //Llenar Areas
+                        $("#cbo_areas").html(`<option value>--Seleccione una opción--</option>`);
+                        $("#cbo_servicios").html(`<option value>--Seleccione una opción--</option>`);
+                        $("#cbo_categorias").html(`<option value>--Seleccione una opción--</option>`);
+                        $("#cbo_sintomas").html(`<option value>--Seleccione una opción--</option>`);
+                        $.each(data.areas, function(index, item) {
+                            $("#cbo_areas").append(`
+                            <option value="${item.id}">${item.name}</option>
+                            `);
+                        });
+                        //Llenar prioridades
+                        $("#cbo_prioridades").html(`<option value>--Seleccione una opción--</option>`);
+                        $.each(data.prioridades, function(index, item) {
+                            $("#cbo_prioridades").append(`
+                            <option value="${item.id}">${item.name}</option>
+                            `);
+                        });
+
+                        $("#create_case_modal").modal();
+                    },
+                    error: err => console.log(JSON.stringify(err))
+                });
+
+
+
+            }
+
+            function changeArea(area) {
+                if (area.length > 0) {
+                    $.ajax({
+                        type: "GET",
+                        url: api_host + "change_area",
+                        data: {
+                            api_token: window.localStorage.getItem("api_token"),
+                            area_id: area
+                        },
+                        success: (data) => {
+                            $("#cbo_servicios").html(`<option value>--Seleccione una opción--</option>`);
+                            $.each(data.servicios, function(index, item) {
+                                $("#cbo_servicios").append(`
+                            <option value="${item.id}">${item.name}</option>
+                            `);
+                            });
+                        },
+                        error: err => console.log(JSON.stringify(err))
+                    });
+                } else {
+                    console.log("No se seleccino area");
+                    $("#cbo_servicios").html(`<option value>--Seleccione una opción--</option>`);
+                    $("#cbo_categorias").html(`<option value>--Seleccione una opción--</option>`);
+                    $("#cbo_sintomas").html(`<option value>--Seleccione una opción--</option>`);
+                }
+            }
+
+            function changeServicio(servicio) {
+                if (servicio.length > 0) {
+                    $.ajax({
+                        type: "GET",
+                        url: api_host + "change_servicio",
+                        data: {
+                            api_token: window.localStorage.getItem("api_token"),
+                            servicio_id: servicio
+                        },
+                        success: (data) => {
+                            $("#cbo_categorias").html(`<option value>--Seleccione una opción--</option>`);
+                            $.each(data.categorias, function(index, item) {
+                                $("#cbo_categorias").append(`
+                            <option value="${item.id}">${item.name}</option>
+                            `);
+                            });
+                        },
+                        error: err => console.log(JSON.stringify(err))
+                    });
+                } else {
+                    console.log("No se seleccino categoria");
+                    $("#cbo_categorias").html(`<option value>--Seleccione una opción--</option>`);
+                    $("#cbo_sintomas").html(`<option value>--Seleccione una opción--</option>`);
+                }
+            }
+
+            function changeCategoria(categoria) {
+                if (categoria.length > 0) {
+                    $.ajax({
+                        type: "GET",
+                        url: api_host + "change_categoria",
+                        data: {
+                            api_token: window.localStorage.getItem("api_token"),
+                            categoria_id: categoria
+                        },
+                        success: (data) => {
+                            console.log(data);
+                            $("#cbo_sintomas").html(`<option value>--Seleccione una opción--</option>`);
+                            $.each(data.sintomas, function(index, item) {
+                                $("#cbo_sintomas").append(`
+                            <option value="${item.id}">${item.name}</option>
+                            `);
+                            });
+                        },
+                        error: err => console.log(JSON.stringify(err))
+                    });
+                } else {
+                    console.log("No se seleccino categoria");
+                    $("#cbo_sintomas").html(`<option value>--Seleccione una opción--</option>`);
+                }
+            }
+        </script>
 </body>
 
 </html>

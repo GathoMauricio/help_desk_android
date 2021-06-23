@@ -1,9 +1,19 @@
+html {
+    min-width: 100%;
+    min-height: 100%;
+}
+
 body {
     background: url(../img/restaurant_wallpaper.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    margin: 0px;
+    left: 0;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .splash {
@@ -85,7 +95,6 @@ body {
     width: 100%;
     left: 0;
     bottom: 0;
-    padding-right: 10px;
     padding-bottom: 30px;
     text-align: center;
 }

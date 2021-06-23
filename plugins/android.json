@@ -7,9 +7,6 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.dotech.help_desk_android"
-    },
     "cordova-plugin-firebasex": {
       "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
       "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "true",
@@ -32,6 +29,9 @@
       "ANDROID_FIREBASE_CRASHLYTICS_NDK_VERSION": "18.0.1",
       "ANDROID_GSON_VERSION": "2.8.7",
       "ANDROID_FIREBASE_PERF_GRADLE_PLUGIN_VERSION": "1.4.0",
+      "PACKAGE_NAME": "com.dotech.help_desk_android"
+    },
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.dotech.help_desk_android"
     }
   },
