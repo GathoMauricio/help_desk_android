@@ -8,6 +8,9 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="Toast">
+        <param name="android-package" value="nl.xservices.plugins.Toast" />
+    </feature>
     <name>help_desk_android</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

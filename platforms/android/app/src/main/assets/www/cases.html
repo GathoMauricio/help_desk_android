@@ -73,56 +73,65 @@
             <span aria-hidden="true">&times;</span>
           </button>
                     </div>
-                    <div class="modal-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="lbl-form">Área</label>
-                                        <select class="form-control" id="cbo_areas" onchange="changeArea(this.value);">
+                    <form id="frm_store_case">
+                        <input type="hidden" name="api_token" id="txt_api_token">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Área</label>
+                                            <select class="form-control" id="cbo_areas" onchange="changeArea(this.value);">
                                             <option value="">--Seleccione una opción--</option>
                                         </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="lbl-form">Servicio</label>
-                                        <select class="form-control" id="cbo_servicios" onchange="changeServicio(this.value);">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Servicio</label>
+                                            <select class="form-control" id="cbo_servicios" onchange="changeServicio(this.value);">
                                             <option value="">--Seleccione una opción--</option>
                                         </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="lbl-form">Categoría</label>
-                                        <select class="form-control" id="cbo_categorias" onchange="changeCategoria(this.value);">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Categoría</label>
+                                            <select class="form-control" id="cbo_categorias" onchange="changeCategoria(this.value);">
                                             <option value="">--Seleccione una opción--</option>
                                         </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="lbl-form">Síntoma</label>
-                                        <select class="form-control" id="cbo_sintomas">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Síntoma</label>
+                                            <select class="form-control" id="cbo_sintomas">
                                             <option value="">--Seleccione una opción--</option>
                                         </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="lbl-form">Prioridad</label>
-                                        <select class="form-control" id="cbo_prioridades">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Prioridad</label>
+                                            <select class="form-control" id="cbo_prioridades">
                                             <option value="">--Seleccione una opción--</option>
                                         </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="lbl-form">Descripción</label>
+                                            <textarea class="form-control" id="txt_descripcion"></textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
-                        <button type="button" class="btn btn-primary">Guardar</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -189,12 +198,23 @@
                             );
                         }
                         stopLoading();
+
+                        $("#frm_store_case").submit(function(e) {
+                            e.preventDefault();
+                            if ($("#cbo_areas").val().length <= 0) {
+                                toastError("No se ha seleccionado el área");
+                                return;
+                            }
+                            console.log("Pasa")
+                        });
                     },
                     error: (err) => console.log(JSON.stringify(err)),
                 });
             });
 
             function createCase() {
+                //pasar token al formulario
+                $("#txt_api_token").val(window.localStorage.getItem("api_token"));
                 //lenar campos
                 $.ajax({
                     type: "GET",
