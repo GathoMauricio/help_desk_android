@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "483798734666",
+    "project_id": "helpdesk-247c8",
+    "storage_bucket": "helpdesk-247c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483798734666:android:d4402c6508e83d86c553b3",
+        "android_client_info": {
+          "package_name": "com.dotech.help_desk_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483798734666-7u54n01aaf8bg6s5k4hlknjs3uue8lqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpTjcXSGFyjdP2dlApn-ABvF0vzVi5wO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483798734666-7u54n01aaf8bg6s5k4hlknjs3uue8lqq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
