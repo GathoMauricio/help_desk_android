@@ -1,51 +1,197 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <meta name="color-scheme" content="light dark">
-        <link rel="stylesheet" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="media-src *" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="img/logo.png" type="image/png" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
+    <link href="css/bootstrap.min.css.map" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/sweetalert.css" />
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>index</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="contenedor_vp" style="width: 100%">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 principal-container-vp">
+                        <div style="
+                  width: 100%;
+                  position: absolute;
+                  left: 50%;
+                  top: 50%;
+                  transform: translate(-50%, -50%);
+                  -webkit-transform: translate(-50%, -50%);
+                ">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-8">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <center>
+                                                    <img src="img/alis.png" width="80" height="80" />
+                                                    <br />
+                                                    <span style="font-weight: bold">
+                                                      Alis foods
+                                                      <br/>
+                                                      Help Desk
+                                                    </span>
+                                                </center>
+                                                <br />
+                                                <form method="GET" id="form_login">
+                                                    <div class="form-group row">
+                                                        <label for="email" class="col-md-4 col-form-label text-md-right font-weight-bold">E-Mail</label
+                              >
+                              <div class="col-md-6">
+                                <input
+                                  name="email"
+                                  id="txt_login_email"
+                                  type="text"
+                                  class="form-control"
+                                  onkeyup="return forceLower(this);"
+                                />
+                                <small
+                                  id="span_login_email"
+                                  style="color: #d30035"
+                                ></small>
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="password"
+                                class="col-md-4 col-form-label text-md-right font-weight-bold"
+                                >Contraseña</label
+                              >
+
+                              <div class="col-md-6">
+                                <input
+                                  name="password"
+                                  id="txt_login_password"
+                                  type="password"
+                                  class="form-control"
+                                />
+                                <small
+                                  id="span_login_password"
+                                  style="color: #d30035"
+                                ></small>
+                              </div>
+                            </div>
+                            <div class="form-group row mb-0 pt-3">
+                              <div class="col-md-12 offset-md-4">
+                                <button
+                                  type="submit"
+                                  class="btn btn-primary"
+                                  style="width: 100%"
+                                >
+                                  Acceder
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
-    </body>
+      </div>
+    </div>
+    <!--
+    <div class="splash">
+      <div>
+        <center>
+          <img src="img/logo.png" width="120" />
+          <h5>Help desk</h5>
+          <img src="img/loading.gif" width="80" />
+        </center>
+      </div>
+    </div>
+  -->
+    <script src="cordova.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/sweetalert.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#form_login").on("submit", (e) => {
+          e.preventDefault();
+          const email = $("#txt_login_email");
+          const password = $("#txt_login_password");
+          $("#span_login_email").text("");
+          $("#span_login_password").text("");
+          if (email.val().length <= 0) {
+            $("#span_login_email").text("Ingrese su e-mail por favor");
+            return false;
+          }
+          if (testEmail(email.val())) {
+            $("#span_login_email").text("Ingrese un e-mail válido por favor");
+            return false;
+          }
+          if (password.val().length <= 0) {
+            $("#span_login_password").text("Ingrese su contraseña por favor");
+            return false;
+          }
+          const form = $("#form_login");
+          console.log("llamando: " + api_host + "login");
+          loading("Espere", "Obteniendo información...");
+          $.ajax({
+            type: "GET",
+            url: api_host + "login",
+            data: form.serialize(),
+            success: (data) => {
+              console.log(JSON.stringify(data));
+              switch (data.error) {
+                case 0: // Correct Access
+                  window.localStorage.setItem("api_token", data.api_token);
+                  window.location.reload();
+                  break;
+                case 1: // Inactive User
+                  swal("", data.message, "warning");
+                  break;
+                case 2: // Bad Credentials
+                  $("#txt_login_email").addClass("is-invalid");
+                  password.val("");
+                  swal("", data.message, "error");
+                  break;
+                default:
+                  swal(
+                    "Error",
+                    "No se ha podido obtener la información esperada, verifique que cuenta con una conexión activa a internet."
+                  );
+                  break;
+              }
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+              console.log(JSON.stringify("jqXHR:::" + JSON.stringify(jqXHR)));
+              console.log(textStatus);
+              console.log(errorThrown);
+              if (!checkConnection()) {
+                swal(
+                  "Error",
+                  "No se pudo conectar a internet por favor verifique su conexión e intente de nuevo."
+                );
+              }
+            },
+          });
+        });
+        //End login submit form
+      });
+    </script>
+  </body>
 </html>

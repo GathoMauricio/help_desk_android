@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="media-src *">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="css/bootstrap.min.css.map">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/simple-mobile-menu.css">
+    <link rel="stylesheet" href="css/simple-mobile-menu-responsive.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>cases</title>
+</head>
+
+<body>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand p-2" href="#">
+            <img src="img/alis.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <b>Alis foods</b>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active p-2">
+                    <a class="nav-link link-item-main-menu" href="menu.html">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active p-2">
+                    <a class="nav-link link-item-main-menu" href="cases.html">Casos <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active p-2">
+                    <a class="nav-link link-item-main-menu" href="config.html">Ajustes <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <main id="main_container"></main>
+    <div class="box-buttons" id="box-buttons">
+        <a onclick="createCase();" class="float-button" style="background-color:#BA4A00;"><span
+                class="icon-plus"></span></a>
+    </div>
+    <div id="create_binnacle_container"></div>
+    <div id="main_menu"></div>
+    <script src="cordova.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/sweetalert.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        $(document).ready(function() {
+            const api_token = window.localStorage.getItem("api_token");
+            console.log("My Api: " + api_token);
+            startLoading("Cargando casos...");
+            $.ajax({
+                type: "GET",
+                url: api_host + "case_index",
+                data: {
+                    api_token: api_token
+                },
+                success: data => {
+                    console.log(data);
+                    let count = 0;
+                    $.each(data, (index, item) => {
+                        count++;
+                        $("#main_container")
+                            .append(`<div class="row" onclick="onShowBinnacleImages(${item.id});">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <table style="width: 100%;">
+                                                        <tr>
+                                                            <td width="80%" class="p-1" style="font-weight:bold;font-size:14px;">
+                                                                <span style="color:#2471A3;font-weight:bold;">${item.author}</span>
+                                                                <br/>
+                                                                ${item.description}
+                                                                <br/>
+                                                                ${item.date}
+                                                            </td>
+                                                            <td width="10%" class="text-center p-1">
+                                                                <span style="font-size:28px;color:#d30035;" class="icon-circle-right"></span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`);
+                    });
+                    $("#main_container")
+                        .append(`<br/><br/><br/>`);
+                    if (count <= 0) {
+                        $("#main_container").html(
+                            `<center><img src="img/empty.png" width="80%"><br><span class="msg_empty">No se encontró información.</span></center>`
+                        );
+                    }
+                    stopLoading();
+                },
+                error: error => console.log(error)
+            });
+        });
+    </script>
+
+</body>
+
+</html>
