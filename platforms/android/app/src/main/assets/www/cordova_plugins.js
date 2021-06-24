@@ -15,11 +15,21 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "window.plugins.toast"
       ]
+    },
+    {
+      "id": "cordova-plugin-spinner.SpinnerPlugin",
+      "file": "plugins/cordova-plugin-spinner/www/spinner-plugin.js",
+      "pluginId": "cordova-plugin-spinner",
+      "clobbers": [
+        "SpinnerPlugin"
+      ]
     }
   ];
   module.exports.metadata = {
     "cordova-plugin-firebasex": "13.0.0",
     "cordova-plugin-whitelist": "1.3.4",
-    "cordova-plugin-x-toast": "2.7.2"
+    "cordova-plugin-x-toast": "2.7.2",
+    "cordova-plugin-vibration": "3.1.1",
+    "cordova-plugin-spinner": "1.1.0"
   };
 });

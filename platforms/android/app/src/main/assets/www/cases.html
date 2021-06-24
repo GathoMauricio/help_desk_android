@@ -105,7 +105,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="lbl-form">Síntoma</label>
-                                            <select class="form-control" id="cbo_sintomas">
+                                            <select name="symptomp_id" class="form-control" id="cbo_sintomas">
                                             <option value="">--Seleccione una opción--</option>
                                         </select>
                                         </div>
@@ -113,7 +113,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="lbl-form">Prioridad</label>
-                                            <select class="form-control" id="cbo_prioridades">
+                                            <select name="priority_case_id" class="form-control" id="cbo_prioridades">
                                             <option value="">--Seleccione una opción--</option>
                                         </select>
                                         </div>
@@ -121,7 +121,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="lbl-form">Descripción</label>
-                                            <textarea class="form-control" id="txt_descripcion"></textarea>
+                                            <textarea name="description" class="form-control" id="txt_descripcion"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +143,8 @@
         <script src="js/sweetalert.js"></script>
         <script src="js/index.js"></script>
         <script>
-            $(document).ready(function() {
+            function cargarCasos() {
+                $("#main_container").html('');
                 startLoading("Cargando casos...");
                 $.ajax({
                     type: "GET",
@@ -152,7 +153,7 @@
                         api_token: window.localStorage.getItem("api_token"),
                     },
                     success: (data) => {
-                        console.log(data);
+                        //console.log(data);
                         let count = 0;
                         $.each(data, (index, item) => {
                             count++;
@@ -191,25 +192,62 @@
                                         </div>
                                     </div>`);
                         });
+
                         $("#main_container").append(`<br/><br/><br/>`);
+
                         if (count <= 0) {
                             $("#main_container").html(
                                 `<center><img src="img/empty.png" width="80%"><br><span class="msg_empty">No se encontró información.</span></center>`
                             );
                         }
-                        stopLoading();
 
-                        $("#frm_store_case").submit(function(e) {
-                            e.preventDefault();
-                            if ($("#cbo_areas").val().length <= 0) {
-                                toastError("No se ha seleccionado el área");
-                                return;
-                            }
-                            console.log("Pasa")
-                        });
+                        stopLoading();
                     },
-                    error: (err) => console.log(JSON.stringify(err)),
+                    error: (err) => console.log(JSON.stringify(err))
                 });
+            }
+            $(document).ready(function() {
+                cargarCasos();
+                $("#frm_store_case").submit(function(e) {
+                    e.preventDefault();
+                    if ($("#cbo_areas").val().length <= 0) {
+                        toastError("No se ha seleccionado el área");
+                        return;
+                    }
+                    if ($("#cbo_servicios").val().length <= 0) {
+                        toastError("No se ha seleccionado el tipo de servicio");
+                        return;
+                    }
+                    if ($("#cbo_categorias").val().length <= 0) {
+                        toastError("No se ha seleccionado la categoría");
+                        return;
+                    }
+                    if ($("#cbo_sintomas").val().length <= 0) {
+                        toastError("No se ha seleccionado el síntoma");
+                        return;
+                    }
+                    if ($("#cbo_prioridades").val().length <= 0) {
+                        toastError("No se ha seleccionado la prioridad");
+                        return;
+                    }
+                    if ($("#txt_descripcion").val().length <= 0) {
+                        toastError("No se ha ingresado la descripción");
+                        return;
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: api_host + "case_store",
+                        data: $("#frm_store_case").serialize(),
+                        success: (data) => {
+                            console.log(data);
+                            $("#create_case_modal").modal('hide');
+                            $("#frm_store_case")[0].reset();
+                            cargarCasos();
+                        },
+                        error: err => console.log(JSON.stringify(err))
+                    });
+                });
+
             });
 
             function createCase() {
@@ -223,7 +261,6 @@
                         api_token: window.localStorage.getItem("api_token"),
                     },
                     success: (data) => {
-                        console.log(data);
                         //Llenar Areas
                         $("#cbo_areas").html(`<option value>--Seleccione una opción--</option>`);
                         $("#cbo_servicios").html(`<option value>--Seleccione una opción--</option>`);
@@ -241,14 +278,10 @@
                             <option value="${item.id}">${item.name}</option>
                             `);
                         });
-
                         $("#create_case_modal").modal();
                     },
                     error: err => console.log(JSON.stringify(err))
                 });
-
-
-
             }
 
             function changeArea(area) {

@@ -6,7 +6,7 @@ const api_host = "http://bb757a9733f4.ngrok.io/api/";
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
-
+    console.log("Spinner " + SpinnerPlugin);
     FirebasePlugin.getToken(fcm_token => {
         console.log("FCM Token: " + fcm_token);
         if (window.localStorage.getItem("api_token") != null) {

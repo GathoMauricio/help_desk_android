@@ -36,6 +36,12 @@
     },
     "cordova-plugin-x-toast": {
       "PACKAGE_NAME": "com.dotech.help_desk_android"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "com.dotech.help_desk_android"
+    },
+    "cordova-plugin-spinner": {
+      "PACKAGE_NAME": "com.dotech.help_desk_android"
     }
   },
   "dependent_plugins": {}
